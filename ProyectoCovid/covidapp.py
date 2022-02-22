@@ -73,17 +73,10 @@ class LoginWindow(QWidget):
             self.hide()
             self.mainwindow.show()
         elif self.usuario.text() != "admin" and self.contraseña.text() != "1234":
-            mensaje.setText("Usuario y contraseña incorrecto")
+            mensaje.setText("Usuario o contraseña incorrecto")
             mensaje.setIcon(QMessageBox.Warning)
             mensaje.exec_()
-        elif self.usuario.text() != "admin":
-            mensaje.setText("Usuario incorrecto")
-            mensaje.setIcon(QMessageBox.Warning)
-            mensaje.exec_()
-        elif self.contraseña.text() != "1234":
-            mensaje.setText("Contraseña incorrecta")
-            mensaje.setIcon(QMessageBox.Warning)
-            mensaje.exec_()
+
         
 
 class MplCanvas(FigureCanvasQTAgg):
