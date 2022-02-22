@@ -11,7 +11,7 @@ from matplotlib.figure import Figure
 from PySide6.QtGui import QAction, QIcon, QKeySequence
 from PySide6.QtWidgets import (
     QApplication, QHBoxLayout, QMainWindow, QComboBox, QVBoxLayout, QWidget, QMessageBox,
-     QLabel, QToolBar, QPushButton, QGridLayout, QLineEdit,
+     QLabel, QToolBar, QPushButton, QGridLayout, QLineEdit
 )
 
 
@@ -47,6 +47,7 @@ class LoginWindow(QWidget):
 
         label_contraseña = QLabel('<font size="4"> Password </font>')
         self.contraseña = QLineEdit()
+        self.contraseña.setEchoMode(QLineEdit.Password)
         self.contraseña.setPlaceholderText("Contraseña: 1234")
         layout.addWidget(label_contraseña, 1, 0)
         layout.addWidget(self.contraseña, 1, 1)
@@ -71,10 +72,19 @@ class LoginWindow(QWidget):
         if self.usuario.text() == "admin" and self.contraseña.text() == "1234":
             self.hide()
             self.mainwindow.show()
-        else: 
+        elif self.usuario.text() != "admin" and self.contraseña.text() != "1234":
+            mensaje.setText("Usuario y contraseña incorrecto")
+            mensaje.setIcon(QMessageBox.Warning)
+            mensaje.exec_()
+        elif self.usuario.text() != "admin":
+            mensaje.setText("Usuario incorrecto")
+            mensaje.setIcon(QMessageBox.Warning)
+            mensaje.exec_()
+        elif self.contraseña.text() != "1234":
             mensaje.setText("Contraseña incorrecta")
             mensaje.setIcon(QMessageBox.Warning)
             mensaje.exec_()
+        
 
 class MplCanvas(FigureCanvasQTAgg):
 
